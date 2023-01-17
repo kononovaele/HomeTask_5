@@ -15,15 +15,10 @@ string InputArrayAsString()
     Console.Write("\n --- Attention, please. Decimal separator: comma (,) and or dot (.)!!!");
 
     Console.Write("\nInput array, please: ");
-    // В верии C# выше 7.0, надо использовать "string?", что означает строка может принимать NULL
-    // Далее, если не было ввода и получили NULL, то заменяем его на пустую строку "", чтобы далее по коду программы не городить
-    // string? вместо string. Поэтому функция возвращает string, а не string?
-    // Пустую строку обработаем далее.
     string? strArray = Console.ReadLine();
     if( String.IsNullOrEmpty(strArray) == true)
         strArray = "";
 
-    // Из строки, которая может иметь значение NULL, делаем строку без NULL. Чтобы не использовать string?
     string str = string.Concat("", strArray);
     return str;
 
@@ -118,7 +113,6 @@ void PrintArrayOfDouble(double[] array)
         // Не забываем красиво форматировать
         str = str + string.Concat(string.Format("{0:f2}", array[i]), ", ");
     }
-    // Не печатаем последнюю запятую
     str = str + string.Concat("", string.Format("{0:f2}", array[array.Length - 1]));
 
     Console.WriteLine($" Result array (double): {str}");
@@ -144,7 +138,6 @@ int[] MultElementsOfArrayInt(int[] array)
 // Произведение пар чисел в одномерном массиве вещественных чисел. Возвращает массив вещественных чисел.
 double[] MultElementsOfArrayDouble(double[] array)
 {
-    // Для нечетного массива, увеличим длину на 1, чтобы умножить среднее число на себя же
     int lenHalf = array.Length / 2 + array.Length % 2;
     int len = array.Length;
     double[] arrayResult = new double[lenHalf];
