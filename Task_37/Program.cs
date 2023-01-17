@@ -180,10 +180,10 @@ void main()
     string[] wordsOfNumbers = GetStrArrayOfNumvers(strArray);
 
     // Проверяем у нас строка целых или строка вещественных чисел в массиве
-    bool isOfIntegers = IsSrtOfIntegers(strArray);
+    bool isIntegers = IsSrtOfIntegers(strArray);
 
     // Если у нас массив целых чисел, то идем по ветке - целых чисел
-    if (isOfIntegers == true)
+    if (isIntegers == true)
     {
         // Получим массив целых чисел из массива строк чисел
         int[] array = GetConvertStrArrayToArrayInt(wordsOfNumbers);
