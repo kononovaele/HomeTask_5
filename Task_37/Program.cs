@@ -12,7 +12,7 @@ string InputArrayAsString()
     Console.Write("\n --- Or input array of double (as example: 99,0 1,01 -12,24 10,0 101,0) or (11.0 -2.0 4.4 11.1), it is array of double");
     Console.Write("\n --- The number separator is a space and or Tab!");
     //Console.Write("\n --- Attention, please. Decimal separator, strictly comma (,)!!!");
-    Console.Write("\n --- Attention, please. Decimal separator: comma (,) or dot (.)!!!");
+    Console.Write("\n --- Attention, please. Decimal separator: comma (,) and or dot (.)!!!");
 
     Console.Write("\nInput array, please: ");
     // В верии C# выше 7.0, надо использовать "string?", что означает строка может принимать NULL
@@ -163,8 +163,8 @@ void main()
     Console.WriteLine(" ------- Task-37 -------");
 
     // Получить строку ввода массива. Это строка вида: "11 71 88 -10 -12 33", если массив целочисленных цисел
-    // Или строка вида: "11,0 -5,5 3,1 88,9" или "0.2 33.3 4.6 9.0", если массив вещественных
-    // чисел (разделитель - запятая "," или точка "."!).
+    // Или строка вида: "11,0 -5,5 3,1 88,9" или "0.2 33.3 4.6 9.0" или "1,44 1.0 -9,0 22.11", если массив вещественных
+    // чисел (разделитель - запятая "," и или точка "."!).
     string strArray = InputArrayAsString();
     Console.WriteLine($"\n You input array: {strArray}");
 
