@@ -18,6 +18,7 @@ string InputArrayAsString()
     // В верии C# выше 7.0, надо использовать "string?", что означает строка может принимать NULL
     // Далее, если не было ввода и получили NULL, то заменяем его на пустую строку "", чтобы далее по коду программы не городить
     // string? вместо string. Поэтому функция возвращает string, а не string?
+    // Пустую строку обработаем далее.
     string? strArray = Console.ReadLine();
     if( String.IsNullOrEmpty(strArray) == true)
         strArray = "";
@@ -34,7 +35,8 @@ string InputArrayAsString()
 string GetNormilizeStrArray(string strArray)
 {
 
-    return strArray;
+    return strArray.Replace(".", ",");
+
 }
 
 // НЕ ИСПОЛЬЗУЕТСЯ, НО ПОКА ОСТАВИМ
@@ -50,7 +52,7 @@ int GetCountElementsOfArray(string strArray)
 */
 
 // Возвращает Истина, если strArray состоит из целых чисел, Ложь - если строка состоит из вещественных чисел.
-// Алгоритм проверки: Если в строка чисел содержится ",", пример: "12,0 77,4 -55,5", значит это строка вещественных чисел.
+// Алгоритм проверки: Если в строка чисел содержится запятая ",", пример: "12,0 77,4 -55,5", значит это строка вещественных чисел.
 bool IsSrtOfIntegers(string strArray)
 {
     bool isIntegers = true;
@@ -113,9 +115,11 @@ void PrintArrayOfDouble(double[] array)
     string str = "";
     for(int i = 0; i < array.Length - 1; ++i)
     {
-        str = str + string.Concat(array[i], ", ");
+        // Не забываем красиво форматировать
+        str = str + string.Concat(string.Format("{0:f2}", array[i]), ", ");
     }
-    str = str + string.Concat("", array[array.Length - 1]);
+    // Не печатаем последнюю запятую
+    str = str + string.Concat("", string.Format("{0:f2}", array[array.Length - 1]));
 
     Console.WriteLine($" Result array (double): {str}");
 }
@@ -170,6 +174,7 @@ void main()
     // Для отладки
     //Console.WriteLine($"countElements: {countElements}");
 
+    // Если были введены вещественные числа с разделителем точка ".", то заменяем точку на запятую ","
     strArray = GetNormilizeStrArray(strArray);
 
     string[] wordsOfNumbers = GetStrArrayOfNumvers(strArray);
