@@ -5,24 +5,36 @@
 // СДЕЛАТЬ МИНИМУМ ТРИ МЕТОДА
 //
 
-// Ввод числа, как массив. Массив это числп разделенные пробелом (пробелами) и или Табом
+// Ввод числа, как массив. Массив это числа разделенные пробелом (пробелами) и или Табом
 string InputArrayAsString()
 {
     Console.Write(" --- Input array of integers (as example: 12 45 89 -12 101), it is array of integer");
-    Console.Write("\n --- Or input array of double (as example: 99,0 1,01 -12,24 10,0 101,0), it is array of double");
+    Console.Write("\n --- Or input array of double (as example: 99,0 1,01 -12,24 10,0 101,0) or (11.0 -2.0 4.4 11.1), it is array of double");
     Console.Write("\n --- The number separator is a space and or Tab!");
-    Console.Write("\n --- Attention, please. Decimal separator, strictly comma (,)!!!");
+    //Console.Write("\n --- Attention, please. Decimal separator, strictly comma (,)!!!");
+    Console.Write("\n --- Attention, please. Decimal separator: comma (,) or dot (.)!!!");
 
     Console.Write("\nInput array, please: ");
+    // В верии C# выше 7.0, надо использовать "string?", что означает строка может принимать NULL
+    // Далее, если не было ввода и получили NULL, то заменяем его на пустую строку "", чтобы далее по коду программы не городить
+    // string? вместо string. Поэтому функция возвращает string, а не string?
     string? strArray = Console.ReadLine();
     if( String.IsNullOrEmpty(strArray) == true)
         strArray = "";
 
-    string str = "";
     // Из строки, которая может иметь значение NULL, делаем строку без NULL. Чтобы не использовать string?
-    str = string.Concat("", strArray);
+    string str = string.Concat("", strArray);
     return str;
 
+}
+
+// Получает на входе строку из консоли ввода. Если были введены вещественные числа, разделитель которых точка ".",
+// то надо точку заменить на запятую ",", чтобы можно было выполнить конвертацию Converte.ToDouble()
+// Возвращает строку вещественных чисел, разделитель дробной части которых - запятая ","
+string GetNormilizeStrArray(string strArray)
+{
+
+    return strArray;
 }
 
 // НЕ ИСПОЛЬЗУЕТСЯ, НО ПОКА ОСТАВИМ
@@ -31,13 +43,9 @@ string InputArrayAsString()
 /*
 int GetCountElementsOfArray(string strArray)
 {
-    int countElements = 0;
-
     string[] words = strArray.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-    countElements = words.Length;
-
-    return countElements;
+    return words.Length;
 }
 */
 
@@ -151,7 +159,8 @@ void main()
     Console.WriteLine(" ------- Task-37 -------");
 
     // Получить строку ввода массива. Это строка вида: "11 71 88 -10 -12 33", если массив целочисленных цисел
-    // Или строка вида: "11,0 -5,5 3,1 88,9", если массив вещественных чисел (разделитель - запятая!).
+    // Или строка вида: "11,0 -5,5 3,1 88,9" или "0.2 33.3 4.6 9.0", если массив вещественных
+    // чисел (разделитель - запятая "," или точка "."!).
     string strArray = InputArrayAsString();
     Console.WriteLine($"\n You input array: {strArray}");
 
@@ -160,6 +169,8 @@ void main()
 
     // Для отладки
     //Console.WriteLine($"countElements: {countElements}");
+
+    strArray = GetNormilizeStrArray(strArray);
 
     string[] wordsOfNumbers = GetStrArrayOfNumvers(strArray);
 
